@@ -1,0 +1,220 @@
+.cliplii-player {
+    position: relative;
+    width: 100%;
+    background: #000;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cliplii-video {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.cliplii-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 16px;
+    color: white;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.cliplii-player:hover .cliplii-title {
+    opacity: 1;
+}
+
+.cliplii-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.cliplii-player:hover .cliplii-controls {
+    opacity: 1;
+}
+
+.cliplii-progress {
+    height: 4px;
+    width: 100%;
+    background: rgba(255,255,255,0.2);
+    cursor: pointer;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.cliplii-progress-filled {
+    height: 100%;
+    background: #2a5885;
+    width: 0;
+    border-radius: 2px;
+    transition: width 0.1s linear;
+}
+
+.cliplii-controls-bottom {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cliplii-button {
+    background: none;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cliplii-button svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.cliplii-volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cliplii-volume-slider {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.2);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.cliplii-volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cliplii-volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cliplii-volume-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+}
+
+.cliplii-volume-slider:hover::-moz-range-thumb {
+    transform: scale(1.2);
+}
+
+.cliplii-time {
+    color: white;
+    font-size: 14px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+/* Fullscreen styles */
+.cliplii-player:fullscreen {
+    width: 100vw;
+    height: 100vh;
+}
+
+.cliplii-player:fullscreen .cliplii-video {
+    height: 100vh;
+}
+
+/* Hover effects */
+.cliplii-button:hover {
+    color: #2a5885;
+}
+
+.cliplii-progress:hover .cliplii-progress-filled {
+    transform: scaleY(1.5);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .cliplii-controls {
+        padding: 8px;
+    }
+
+    .cliplii-volume-control {
+        display: none;
+    }
+
+    .cliplii-time {
+        font-size: 12px;
+    }
+
+    .cliplii-button svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .cliplii-title {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
+
+/* Focus styles for accessibility */
+.cliplii-button:focus,
+.cliplii-volume-slider:focus {
+    outline: 2px solid #2a5885;
+    outline-offset: 2px;
+}
+
+/* Loading spinner */
+.cliplii-player.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    margin: -20px 0 0 -20px;
+    border: 4px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #2a5885;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Error state */
+.cliplii-player.error::after {
+    content: 'Error loading video';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 20px;
+    border-radius: 4px;
+}
